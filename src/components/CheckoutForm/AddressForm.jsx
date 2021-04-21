@@ -29,8 +29,8 @@ const AddressForm = ({ checkoutToken, test }) => {
     setShippingSubdivision(Object.keys(subdivisions)[0]);
   };
 
-  const fetchShippingOptions = async (checkoutTokenId, country, stateProvince = null) => {
-    const options = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region: stateProvince });
+  const fetchShippingOptions = async (checkoutTokenId, country, region = null) => {
+    const options = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region: region });
 
     setShippingOptions(options);
     setShippingOption(options[0].id);
@@ -54,12 +54,12 @@ const AddressForm = ({ checkoutToken, test }) => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((data) => test({ ...data, shippingCountry, shippingSubdivision, shippingOption }))}>
           <Grid container spacing={3}>
-            <FormInput required name="firstName" label="First name" />
-            <FormInput required name="lastName" label="Last name" />
-            <FormInput required name="address1" label="Address line 1" />
-            <FormInput required name="email" label="Email" />
-            <FormInput required name="city" label="City" />
-            <FormInput required name="zip" label="Zip / Postal code" />
+            <FormInput name="firstName" label="First Name" />
+            <FormInput name="lastName" label="Last Name" />
+            <FormInput name="address1" label="Address line 1" />
+            <FormInput name="email" label="Email" />
+            <FormInput name="city" label="City" />
+            <FormInput name="zip" label="Zip / Postal code" />
             <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
               <Select value={shippingCountry} fullWidth onChange={(e) => setShippingCountry(e.target.value)}>
